@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Veille IA Vidéo — Julien Retailleau</title>
+<title>Veille IA Vidéo — NitramIA</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -22,6 +22,7 @@
   .api-status { font-size: 12px; flex-shrink: 0; color: var(--text-muted); }
   .api-status.ok { color: #1D9E75; }
   .api-status.ko { color: #E24B4A; }
+  .save-hint { font-size: 11px; color: var(--text-dim); width: 100%; margin-top: -4px; }
   .toolbar { display: flex; justify-content: flex-end; margin-bottom: 1rem; gap: 8px; }
   .btn-sm { padding: 6px 14px; font-size: 12px; border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
   .btn-sm:hover { background: var(--surface); color: var(--text); }
@@ -35,7 +36,8 @@
   .progress-bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 8px; overflow: hidden; }
   .progress-fill { height: 100%; width: 0%; background: #378ADD; border-radius: 2px; transition: width 0.5s linear; }
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 12px; }
+  .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--border-hover); }
   .card-header { display: flex; align-items: flex-start; gap: 10px; }
   .icon { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
   .card-title { font-size: 14px; font-weight: 500; }
@@ -57,7 +59,7 @@
   .result-item h4 { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
   .result-item p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
   .timestamp { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
-  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 8px 18px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 8px 18px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; color: var(--text); }
   .toast.show { opacity: 1; }
   footer { margin-top: 3rem; font-size: 12px; color: var(--text-dim); text-align: center; }
 </style>
@@ -73,8 +75,9 @@
 
 <div class="api-bar">
   <label>Clé API Anthropic</label>
-  <input type="password" id="api-key" placeholder="sk-ant-api03-..." oninput="checkKey()" />
-  <span class="api-status" id="api-status">Entrez votre clé pour commencer</span>
+  <input type="password" id="api-key" placeholder="sk-ant-api03-..." oninput="onKeyInput()" />
+  <span class="api-status" id="api-status">Entrez votre clé</span>
+  <span class="save-hint" id="save-hint"></span>
 </div>
 
 <div class="toolbar">
@@ -142,21 +145,41 @@
   </div>
 </div>
 
-<footer>Veille IA Vidéo · Julien Retailleau · Merkutio</footer>
+<footer>Veille IA Vidéo · Julien Retailleau · NitramIA</footer>
 
 <script>
 const store = {};
 let speaking = false, allText = '';
 
-function checkKey() {
+function onKeyInput() {
   const key = document.getElementById('api-key').value.trim();
   const s = document.getElementById('api-status');
-  if (key.startsWith('sk-ant-') && key.length > 20) { s.textContent = 'Clé valide ✓'; s.className = 'api-status ok'; }
-  else if (key.length > 0) { s.textContent = 'Format invalide'; s.className = 'api-status ko'; }
-  else { s.textContent = 'Entrez votre clé pour commencer'; s.className = 'api-status'; }
+  const hint = document.getElementById('save-hint');
+  if (key.startsWith('sk-ant-') && key.length > 20) {
+    s.textContent = 'Clé valide ✓'; s.className = 'api-status ok';
+    localStorage.setItem('nitramia_key', key);
+    hint.textContent = 'Clé mémorisée sur cet appareil.';
+  } else if (key.length > 0) {
+    s.textContent = 'Format invalide'; s.className = 'api-status ko';
+    hint.textContent = '';
+  } else {
+    s.textContent = 'Entrez votre clé'; s.className = 'api-status';
+    hint.textContent = '';
+    localStorage.removeItem('nitramia_key');
+  }
 }
 
 function getKey() { return document.getElementById('api-key').value.trim(); }
+
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('nitramia_key');
+  if (saved) {
+    document.getElementById('api-key').value = saved;
+    document.getElementById('api-status').textContent = 'Clé valide ✓';
+    document.getElementById('api-status').className = 'api-status ok';
+    document.getElementById('save-hint').textContent = 'Clé mémorisée sur cet appareil.';
+  }
+});
 
 async function scan(btn, id, prompt, label) {
   const key = getKey();
@@ -168,15 +191,22 @@ async function scan(btn, id, prompt, label) {
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': key,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514', max_tokens: 1000,
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
         tools: [{ type: 'web_search_20250305', name: 'web_search' }],
         system: 'Tu es un expert en veille stratégique pour les directeurs de production vidéo. Réponds uniquement en JSON valide, sans markdown, sans backticks. Format exact : {"items":[{"titre":"...","contenu":"..."},{"titre":"...","contenu":"..."},{"titre":"...","contenu":"..."},{"titre":"...","contenu":"..."}]}. 4 items max. Titres courts (5 mots max). Contenus factuels et actionnables (2-3 phrases).',
         messages: [{ role: 'user', content: prompt }]
       })
     });
     const data = await res.json();
+    if (data.error) throw new Error(data.error.message);
     let text = '';
     for (const block of data.content) { if (block.type === 'text') text += block.text; }
     text = text.replace(/```json|```/g, '').trim();
@@ -192,7 +222,7 @@ async function scan(btn, id, prompt, label) {
     document.getElementById('audio-' + id).style.display = 'block';
     updateUI();
   } catch (err) {
-    box.innerHTML = '<p style="color:#E24B4A;font-size:12px;">Erreur. Vérifiez votre clé API et votre connexion.</p>';
+    box.innerHTML = `<p style="color:#E24B4A;font-size:12px;">Erreur : ${err.message || 'Vérifiez votre clé API et votre connexion.'}</p>`;
   }
   btn.disabled = false; btn.textContent = 'Rescanner →';
 }
