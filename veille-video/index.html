@@ -205,7 +205,7 @@ function onNotionInput() {
   const db = document.getElementById('notion-db').value.trim();
   const s = document.getElementById('notion-status');
   const hint = document.getElementById('notion-hint');
-  if (token.startsWith('secret_') && db.length >= 32) {
+  if (token.startsWith('secret_') || token.startsWith('ntn_')) && db.length >= 32) {
     s.textContent = 'Configuré ✓'; s.className = 'notion-status ok';
     localStorage.setItem('nitramia_notion_token', token);
     localStorage.setItem('nitramia_notion_db', db);
