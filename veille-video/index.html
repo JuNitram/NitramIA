@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,6 +17,8 @@
   header { margin-bottom: 1.5rem; }
   header h1 { font-size: 22px; font-weight: 500; }
   header p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+  /* API bar */
   .api-bar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .api-bar label { font-size: 13px; color: var(--text-muted); flex-shrink: 0; }
   .api-bar input { flex: 1; min-width: 200px; background: var(--bg); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 7px 12px; font-size: 13px; color: var(--text); outline: none; font-family: monospace; }
@@ -24,6 +27,8 @@
   .api-status.ok { color: #1D9E75; }
   .api-status.ko { color: #E24B4A; }
   .save-hint { font-size: 11px; color: var(--text-dim); width: 100%; margin-top: -4px; }
+
+  /* Notion bar */
   .notion-bar { background: var(--surface); border: 0.5px solid rgba(232,224,213,0.12); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .notion-logo { width: 22px; height: 22px; background: var(--notion-bg); border: 0.5px solid rgba(232,224,213,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--notion); flex-shrink: 0; }
   .notion-bar label { font-size: 13px; color: var(--text-muted); flex-shrink: 0; }
@@ -35,12 +40,16 @@
   .notion-status.ok { color: #1D9E75; }
   .notion-status.ko { color: #E24B4A; }
   .notion-hint { font-size: 11px; color: var(--text-dim); width: 100%; margin-top: -4px; }
+
+  /* Toolbar */
   .toolbar { display: flex; justify-content: flex-end; margin-bottom: 1rem; gap: 8px; }
   .btn-sm { padding: 6px 14px; font-size: 12px; border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
   .btn-sm:hover { background: var(--surface); color: var(--text); }
   .btn-sm:disabled { opacity: 0.3; cursor: not-allowed; }
   .btn-notion-all { border-color: rgba(232,224,213,0.2); color: var(--notion); }
   .btn-notion-all:hover { background: var(--notion-bg); color: var(--notion); }
+
+  /* Podcast bar */
   .podcast-bar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; display: none; align-items: center; gap: 12px; margin-bottom: 1rem; }
   .podcast-bar.visible { display: flex; }
   .play-btn { width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid var(--border-hover); background: transparent; cursor: pointer; font-size: 14px; color: var(--text); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -49,6 +58,8 @@
   .podcast-status { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
   .progress-bar { height: 3px; background: var(--border); border-radius: 2px; margin-top: 8px; overflow: hidden; }
   .progress-fill { height: 100%; width: 0%; background: #378ADD; border-radius: 2px; transition: width 0.5s linear; }
+
+  /* Grid & cards */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
   .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.2s; }
   .card:hover { border-color: var(--border-hover); }
@@ -56,18 +67,24 @@
   .icon { width: 32px; height: 32px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
   .card-title { font-size: 14px; font-weight: 500; }
   .card-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; line-height: 1.4; }
+
+  /* Button row */
   .btn-row { display: flex; gap: 6px; }
   .scan-btn { flex: 1; padding: 8px; font-size: 13px; font-weight: 500; border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); background: transparent; color: var(--text); cursor: pointer; }
   .scan-btn:hover { background: rgba(255,255,255,0.04); }
   .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .audio-btn { padding: 8px 12px; font-size: 13px; border: 0.5px solid var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--text-muted); cursor: pointer; display: none; }
   .audio-btn:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+
+  /* Notion save button */
   .notion-btn { padding: 8px 11px; font-size: 12px; font-weight: 600; border: 0.5px solid rgba(232,224,213,0.15); border-radius: var(--radius-sm); background: transparent; color: rgba(232,224,213,0.4); cursor: not-allowed; display: none; transition: all 0.15s; letter-spacing: 0.02em; }
   .notion-btn.ready { color: var(--notion); cursor: pointer; border-color: rgba(232,224,213,0.25); }
   .notion-btn.ready:hover { background: var(--notion-bg); }
   .notion-btn.saved { color: #1D9E75; border-color: rgba(29,158,117,0.3); cursor: default; }
   .notion-btn.error { color: #E24B4A; border-color: rgba(226,75,74,0.3); cursor: default; }
   .notion-btn.saving { opacity: 0.5; cursor: not-allowed; }
+
+  /* Results */
   .results { font-size: 13px; line-height: 1.6; border-top: 0.5px solid var(--border); padding-top: 12px; display: none; }
   .results.visible { display: block; }
   .loading-dots { display: inline-flex; gap: 3px; align-items: center; }
@@ -80,25 +97,34 @@
   .result-item h4 { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
   .result-item p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
   .timestamp { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
+
+  /* Toast */
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 8px 18px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; color: var(--text); white-space: nowrap; }
   .toast.show { opacity: 1; }
   .toast.success { border-color: rgba(29,158,117,0.4); color: #1D9E75; }
   .toast.error { border-color: rgba(226,75,74,0.4); color: #E24B4A; }
+
   footer { margin-top: 3rem; font-size: 12px; color: var(--text-dim); text-align: center; }
 </style>
 </head>
 <body>
+
 <div class="toast" id="toast"></div>
+
 <header>
   <h1>Veille IA Vidéo</h1>
   <p>Scan web en direct · Lecture audio · Export NotebookLM · Sauvegarde Notion</p>
 </header>
+
+<!-- Clé Anthropic -->
 <div class="api-bar">
   <label>Clé API Anthropic</label>
   <input type="password" id="api-key" placeholder="sk-ant-api03-..." oninput="onKeyInput()" />
   <span class="api-status" id="api-status">Entrez votre clé</span>
   <span class="save-hint" id="save-hint"></span>
 </div>
+
+<!-- Config Notion -->
 <div class="notion-bar">
   <div class="notion-logo">N</div>
   <label>Token</label>
@@ -108,11 +134,13 @@
   <span class="notion-status" id="notion-status">Non configuré</span>
   <span class="notion-hint" id="notion-hint">notion.so/my-integrations → copier le token · Partager la base avec l'intégration · Copier l'ID depuis l'URL</span>
 </div>
+
 <div class="toolbar">
   <button class="btn-sm" id="export-btn" onclick="copyForNotebook()" disabled>Copier pour NotebookLM</button>
   <button class="btn-sm btn-notion-all" id="notion-all-btn" onclick="saveAllToNotion()" disabled>Tout → Notion</button>
   <button class="btn-sm" onclick="scanAll()">Tout scanner →</button>
 </div>
+
 <div class="podcast-bar" id="podcast-bar">
   <button class="play-btn" id="play-btn" onclick="togglePlay()">▶</button>
   <div class="podcast-info">
@@ -122,7 +150,9 @@
   </div>
   <button class="btn-sm" onclick="copyForNotebook()">→ NotebookLM</button>
 </div>
+
 <div class="grid">
+
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(29,158,117,0.15);color:#1D9E75;">▶</div>
@@ -135,6 +165,7 @@
     </div>
     <div class="results" id="ia_video"></div>
   </div>
+
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(55,138,221,0.15);color:#378ADD;">◈</div>
@@ -147,6 +178,7 @@
     </div>
     <div class="results" id="formats_mkt"></div>
   </div>
+
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(239,159,39,0.15);color:#EF9F27;">⬡</div>
@@ -159,6 +191,7 @@
     </div>
     <div class="results" id="workflow"></div>
   </div>
+
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(212,83,126,0.15);color:#D4537E;">◉</div>
@@ -171,8 +204,11 @@
     </div>
     <div class="results" id="agences"></div>
   </div>
+
 </div>
+
 <footer>Veille IA Vidéo · Julien Retailleau · NitramIA</footer>
+
 <script>
 const store = {};
 let speaking = false, allText = '';
@@ -180,6 +216,7 @@ const NOTION_PROXY = 'https://corsproxy.io/?';
 const NOTION_API = 'https://api.notion.com/v1/pages';
 const CARD_IDS = ['ia_video', 'formats_mkt', 'workflow', 'agences'];
 
+/* ── Anthropic key ── */
 function onKeyInput() {
   const key = document.getElementById('api-key').value.trim();
   const s = document.getElementById('api-status');
@@ -200,12 +237,13 @@ function onKeyInput() {
 
 function getKey() { return document.getElementById('api-key').value.trim(); }
 
+/* ── Notion config ── */
 function onNotionInput() {
   const token = document.getElementById('notion-token').value.trim();
   const db = document.getElementById('notion-db').value.trim();
   const s = document.getElementById('notion-status');
   const hint = document.getElementById('notion-hint');
-  if (token.startsWith('secret_') || token.startsWith('ntn_')) && db.length >= 32) {
+  if ((token.startsWith('secret_') || token.startsWith('ntn_')) && db.length >= 32) {
     s.textContent = 'Configuré ✓'; s.className = 'notion-status ok';
     localStorage.setItem('nitramia_notion_token', token);
     localStorage.setItem('nitramia_notion_db', db);
@@ -222,7 +260,7 @@ function onNotionInput() {
 
 function getNotionToken() { return document.getElementById('notion-token').value.trim(); }
 function getNotionDb() { return document.getElementById('notion-db').value.trim(); }
-function isNotionReady() { const t = getNotionToken(); const d = getNotionDb(); return t.startsWith('secret_') && d.length >= 32; }
+function isNotionReady() { const t = getNotionToken(); const d = getNotionDb(); return (t.startsWith('secret_') || t.startsWith('ntn_')) && d.length >= 32; }
 
 function refreshNotionButtons() {
   const ready = isNotionReady();
@@ -241,6 +279,7 @@ function refreshNotionButtons() {
   document.getElementById('notion-all-btn').disabled = !(ready && Object.keys(store).length > 0);
 }
 
+/* ── Scan ── */
 async function scan(btn, id, prompt, label) {
   const key = getKey();
   if (!key || !key.startsWith('sk-ant-')) { alert('Entrez votre clé API Anthropic en haut de la page.'); return; }
@@ -248,9 +287,12 @@ async function scan(btn, id, prompt, label) {
   const box = document.getElementById(id);
   box.className = 'results visible';
   box.innerHTML = '<div style="color:#888;font-size:13px;display:flex;align-items:center;gap:8px;">Recherche en cours <span class="loading-dots"><span></span><span></span><span></span></span></div>';
+
+  // Reset notion button state for this card
   const nb = document.getElementById('notion-btn-' + id);
   nb.classList.remove('saved', 'error');
   nb.textContent = 'N';
+
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -300,18 +342,23 @@ function scanAll() {
   ].forEach(c => scan(document.getElementById('btn-' + c.id), c.id, c.prompt, c.label));
 }
 
+/* ── Notion save ── */
 async function saveToNotion(id) {
   if (!isNotionReady()) { alert('Configurez d\'abord votre token Notion et l\'ID de la base en haut de page.'); return; }
   if (!store[id]) { alert('Scannez d\'abord cette rubrique.'); return; }
+
   const btn = document.getElementById('notion-btn-' + id);
   btn.classList.remove('ready', 'saved', 'error');
   btn.classList.add('saving');
   btn.textContent = '↑';
+
   const { label, items } = store[id];
   const token = getNotionToken();
   const dbId = getNotionDb().replace(/-/g, '');
   const today = new Date().toISOString().split('T')[0];
+
   let saved = 0, errors = 0;
+
   for (const item of items) {
     try {
       const payload = {
@@ -321,28 +368,54 @@ async function saveToNotion(id) {
           Rubrique: { select: { name: label } },
           Date: { date: { start: today } }
         },
-        children: [{ object: 'block', type: 'paragraph', paragraph: { rich_text: [{ type: 'text', text: { content: item.contenu } }] } }]
+        children: [{
+          object: 'block',
+          type: 'paragraph',
+          paragraph: {
+            rich_text: [{ type: 'text', text: { content: item.contenu } }]
+          }
+        }]
       };
+
       const url = NOTION_PROXY + encodeURIComponent(NOTION_API);
       const res = await fetch(url, {
         method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', 'Notion-Version': '2022-06-28' },
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json',
+          'Notion-Version': '2022-06-28'
+        },
         body: JSON.stringify(payload)
       });
-      if (res.ok) { saved++; } else { const err = await res.json(); console.error('Notion error:', err); errors++; }
-    } catch (e) { console.error('Fetch error:', e); errors++; }
+
+      if (res.ok) { saved++; }
+      else {
+        const err = await res.json();
+        console.error('Notion error:', err);
+        errors++;
+      }
+    } catch (e) {
+      console.error('Fetch error:', e);
+      errors++;
+    }
   }
+
   btn.classList.remove('saving');
+
   if (errors === 0) {
-    btn.classList.add('saved'); btn.textContent = '✓';
+    btn.classList.add('saved');
+    btn.textContent = '✓';
     showToast(`${saved} éléments sauvés dans Notion`, 'success');
   } else if (saved > 0) {
-    btn.classList.add('saved'); btn.textContent = `${saved}/${items.length}`;
-    showToast(`${saved}/${items.length} sauvés — vérifiez les propriétés Rubrique et Date`, 'error');
+    btn.classList.add('saved');
+    btn.textContent = `${saved}/${items.length}`;
+    showToast(`${saved}/${items.length} sauvés — vérifiez les propriétés Rubrique et Date dans la base`, 'error');
   } else {
-    btn.classList.add('error'); btn.textContent = '!';
+    btn.classList.add('error');
+    btn.textContent = '!';
     showToast('Erreur Notion — vérifiez token, DB ID et permissions', 'error');
   }
+
   refreshNotionButtons();
   document.getElementById('notion-all-btn').disabled = false;
 }
@@ -357,6 +430,7 @@ async function saveAllToNotion() {
   document.getElementById('notion-all-btn').disabled = false;
 }
 
+/* ── UI helpers ── */
 function updateUI() {
   if (Object.keys(store).length > 0) {
     document.getElementById('podcast-bar').className = 'podcast-bar visible';
@@ -381,6 +455,7 @@ function showToast(msg, type = '') {
   setTimeout(() => { t.className = 'toast'; }, 3500);
 }
 
+/* ── Audio ── */
 function readCard(id, label) {
   if (!store[id]) return;
   const parts = [`Rubrique ${label}.`];
@@ -394,7 +469,9 @@ function togglePlay() {
     document.getElementById('play-btn').textContent = '▶';
     document.getElementById('podcast-status').textContent = 'Arrêté';
     document.getElementById('progress-fill').style.width = '0%';
-  } else { buildAllText(); speak(allText, 'Brief veille complet'); }
+  } else {
+    buildAllText(); speak(allText, 'Brief veille complet');
+  }
 }
 
 function speak(text, title) {
@@ -403,8 +480,19 @@ function speak(text, title) {
   utter.lang = 'fr-FR'; utter.rate = 0.95;
   const fr = window.speechSynthesis.getVoices().find(v => v.lang === 'fr-FR' || v.lang.startsWith('fr'));
   if (fr) utter.voice = fr;
-  utter.onstart = () => { speaking = true; document.getElementById('play-btn').textContent = '⏸'; document.getElementById('podcast-status').textContent = 'Lecture en cours...'; document.getElementById('podcast-title').textContent = title; animateProgress(text); };
-  utter.onend = () => { speaking = false; document.getElementById('play-btn').textContent = '▶'; document.getElementById('podcast-status').textContent = 'Terminé'; document.getElementById('progress-fill').style.width = '100%'; };
+  utter.onstart = () => {
+    speaking = true;
+    document.getElementById('play-btn').textContent = '⏸';
+    document.getElementById('podcast-status').textContent = 'Lecture en cours...';
+    document.getElementById('podcast-title').textContent = title;
+    animateProgress(text);
+  };
+  utter.onend = () => {
+    speaking = false;
+    document.getElementById('play-btn').textContent = '▶';
+    document.getElementById('podcast-status').textContent = 'Terminé';
+    document.getElementById('progress-fill').style.width = '100%';
+  };
   utter.onerror = () => { speaking = false; document.getElementById('play-btn').textContent = '▶'; };
   window.speechSynthesis.speak(utter);
 }
@@ -413,7 +501,10 @@ function animateProgress(text) {
   const ms = (text.match(/\s+/g) || []).length * 400;
   const fill = document.getElementById('progress-fill');
   const start = Date.now();
-  const iv = setInterval(() => { if (!speaking) { clearInterval(iv); return; } fill.style.width = Math.min(Math.round(((Date.now() - start) / ms) * 100), 98) + '%'; }, 500);
+  const iv = setInterval(() => {
+    if (!speaking) { clearInterval(iv); return; }
+    fill.style.width = Math.min(Math.round(((Date.now() - start) / ms) * 100), 98) + '%';
+  }, 500);
 }
 
 function copyForNotebook() {
@@ -422,13 +513,28 @@ function copyForNotebook() {
   navigator.clipboard.writeText(allText).then(() => showToast('Contenu copié — colle dans NotebookLM'));
 }
 
+/* ── Init ── */
 window.addEventListener('DOMContentLoaded', () => {
   const key = localStorage.getItem('nitramia_key');
-  if (key) { document.getElementById('api-key').value = key; document.getElementById('api-status').textContent = 'Clé valide ✓'; document.getElementById('api-status').className = 'api-status ok'; document.getElementById('save-hint').textContent = 'Clé mémorisée sur cet appareil.'; }
+  if (key) {
+    document.getElementById('api-key').value = key;
+    document.getElementById('api-status').textContent = 'Clé valide ✓';
+    document.getElementById('api-status').className = 'api-status ok';
+    document.getElementById('save-hint').textContent = 'Clé mémorisée sur cet appareil.';
+  }
   const nt = localStorage.getItem('nitramia_notion_token');
   const nd = localStorage.getItem('nitramia_notion_db');
-  if (nt && nd) { document.getElementById('notion-token').value = nt; document.getElementById('notion-db').value = nd; document.getElementById('notion-status').textContent = 'Configuré ✓'; document.getElementById('notion-status').className = 'notion-status ok'; document.getElementById('notion-hint').textContent = 'Identifiants mémorisés. Scannez une rubrique puis cliquez N pour sauver.'; }
-  CARD_IDS.forEach(id => { document.getElementById('notion-btn-' + id).style.display = 'block'; });
+  if (nt && nd) {
+    document.getElementById('notion-token').value = nt;
+    document.getElementById('notion-db').value = nd;
+    document.getElementById('notion-status').textContent = 'Configuré ✓';
+    document.getElementById('notion-status').className = 'notion-status ok';
+    document.getElementById('notion-hint').textContent = 'Identifiants mémorisés. Scannez une rubrique puis cliquez N pour sauver.';
+  }
+  // Show notion buttons (disabled until scan + notion ready)
+  CARD_IDS.forEach(id => {
+    document.getElementById('notion-btn-' + id).style.display = 'block';
+  });
 });
 </script>
 </body>
