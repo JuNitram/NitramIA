@@ -10,12 +10,13 @@
     --bg: #0f0f0f; --surface: #1a1a1a; --border: rgba(255,255,255,0.08);
     --border-hover: rgba(255,255,255,0.15); --text: #f0f0f0; --text-muted: #888;
     --text-dim: #555; --radius: 12px; --radius-sm: 8px;
+    --notion: #e8e0d5; --notion-bg: rgba(232,224,213,0.08);
   }
   body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; padding: 2rem 1.5rem; max-width: 960px; margin: 0 auto; }
   header { margin-bottom: 1.5rem; }
   header h1 { font-size: 22px; font-weight: 500; }
   header p { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
-  .api-bar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .api-bar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
   .api-bar label { font-size: 13px; color: var(--text-muted); flex-shrink: 0; }
   .api-bar input { flex: 1; min-width: 200px; background: var(--bg); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 7px 12px; font-size: 13px; color: var(--text); outline: none; font-family: monospace; }
   .api-bar input:focus { border-color: rgba(255,255,255,0.3); }
@@ -23,10 +24,23 @@
   .api-status.ok { color: #1D9E75; }
   .api-status.ko { color: #E24B4A; }
   .save-hint { font-size: 11px; color: var(--text-dim); width: 100%; margin-top: -4px; }
+  .notion-bar { background: var(--surface); border: 0.5px solid rgba(232,224,213,0.12); border-radius: var(--radius); padding: 1rem 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .notion-logo { width: 22px; height: 22px; background: var(--notion-bg); border: 0.5px solid rgba(232,224,213,0.2); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--notion); flex-shrink: 0; }
+  .notion-bar label { font-size: 13px; color: var(--text-muted); flex-shrink: 0; }
+  .notion-bar input { background: var(--bg); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 7px 12px; font-size: 12px; color: var(--text); outline: none; font-family: monospace; }
+  .notion-bar input:focus { border-color: rgba(232,224,213,0.3); }
+  .notion-bar input.token-input { width: 220px; }
+  .notion-bar input.db-input { flex: 1; min-width: 160px; }
+  .notion-status { font-size: 12px; flex-shrink: 0; color: var(--text-muted); }
+  .notion-status.ok { color: #1D9E75; }
+  .notion-status.ko { color: #E24B4A; }
+  .notion-hint { font-size: 11px; color: var(--text-dim); width: 100%; margin-top: -4px; }
   .toolbar { display: flex; justify-content: flex-end; margin-bottom: 1rem; gap: 8px; }
   .btn-sm { padding: 6px 14px; font-size: 12px; border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); background: transparent; color: var(--text-muted); cursor: pointer; transition: all 0.15s; }
   .btn-sm:hover { background: var(--surface); color: var(--text); }
   .btn-sm:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn-notion-all { border-color: rgba(232,224,213,0.2); color: var(--notion); }
+  .btn-notion-all:hover { background: var(--notion-bg); color: var(--notion); }
   .podcast-bar { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 1rem 1.25rem; display: none; align-items: center; gap: 12px; margin-bottom: 1rem; }
   .podcast-bar.visible { display: flex; }
   .play-btn { width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid var(--border-hover); background: transparent; cursor: pointer; font-size: 14px; color: var(--text); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -47,6 +61,13 @@
   .scan-btn:hover { background: rgba(255,255,255,0.04); }
   .scan-btn:disabled { opacity: 0.4; cursor: not-allowed; }
   .audio-btn { padding: 8px 12px; font-size: 13px; border: 0.5px solid var(--border); border-radius: var(--radius-sm); background: transparent; color: var(--text-muted); cursor: pointer; display: none; }
+  .audio-btn:hover { background: rgba(255,255,255,0.04); color: var(--text); }
+  .notion-btn { padding: 8px 11px; font-size: 12px; font-weight: 600; border: 0.5px solid rgba(232,224,213,0.15); border-radius: var(--radius-sm); background: transparent; color: rgba(232,224,213,0.4); cursor: not-allowed; display: none; transition: all 0.15s; letter-spacing: 0.02em; }
+  .notion-btn.ready { color: var(--notion); cursor: pointer; border-color: rgba(232,224,213,0.25); }
+  .notion-btn.ready:hover { background: var(--notion-bg); }
+  .notion-btn.saved { color: #1D9E75; border-color: rgba(29,158,117,0.3); cursor: default; }
+  .notion-btn.error { color: #E24B4A; border-color: rgba(226,75,74,0.3); cursor: default; }
+  .notion-btn.saving { opacity: 0.5; cursor: not-allowed; }
   .results { font-size: 13px; line-height: 1.6; border-top: 0.5px solid var(--border); padding-top: 12px; display: none; }
   .results.visible { display: block; }
   .loading-dots { display: inline-flex; gap: 3px; align-items: center; }
@@ -59,32 +80,39 @@
   .result-item h4 { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
   .result-item p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
   .timestamp { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
-  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 8px 18px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; color: var(--text); }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 0.5px solid var(--border-hover); border-radius: var(--radius-sm); padding: 8px 18px; font-size: 13px; opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 100; color: var(--text); white-space: nowrap; }
   .toast.show { opacity: 1; }
+  .toast.success { border-color: rgba(29,158,117,0.4); color: #1D9E75; }
+  .toast.error { border-color: rgba(226,75,74,0.4); color: #E24B4A; }
   footer { margin-top: 3rem; font-size: 12px; color: var(--text-dim); text-align: center; }
 </style>
 </head>
 <body>
-
-<div class="toast" id="toast">Contenu copié — colle dans NotebookLM</div>
-
+<div class="toast" id="toast"></div>
 <header>
   <h1>Veille IA Vidéo</h1>
-  <p>Scan web en direct · Lecture audio · Export NotebookLM</p>
+  <p>Scan web en direct · Lecture audio · Export NotebookLM · Sauvegarde Notion</p>
 </header>
-
 <div class="api-bar">
   <label>Clé API Anthropic</label>
   <input type="password" id="api-key" placeholder="sk-ant-api03-..." oninput="onKeyInput()" />
   <span class="api-status" id="api-status">Entrez votre clé</span>
   <span class="save-hint" id="save-hint"></span>
 </div>
-
+<div class="notion-bar">
+  <div class="notion-logo">N</div>
+  <label>Token</label>
+  <input type="password" class="token-input" id="notion-token" placeholder="secret_..." oninput="onNotionInput()" />
+  <label>Database ID</label>
+  <input type="text" class="db-input" id="notion-db" placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" oninput="onNotionInput()" />
+  <span class="notion-status" id="notion-status">Non configuré</span>
+  <span class="notion-hint" id="notion-hint">notion.so/my-integrations → copier le token · Partager la base avec l'intégration · Copier l'ID depuis l'URL</span>
+</div>
 <div class="toolbar">
   <button class="btn-sm" id="export-btn" onclick="copyForNotebook()" disabled>Copier pour NotebookLM</button>
+  <button class="btn-sm btn-notion-all" id="notion-all-btn" onclick="saveAllToNotion()" disabled>Tout → Notion</button>
   <button class="btn-sm" onclick="scanAll()">Tout scanner →</button>
 </div>
-
 <div class="podcast-bar" id="podcast-bar">
   <button class="play-btn" id="play-btn" onclick="togglePlay()">▶</button>
   <div class="podcast-info">
@@ -94,7 +122,6 @@
   </div>
   <button class="btn-sm" onclick="copyForNotebook()">→ NotebookLM</button>
 </div>
-
 <div class="grid">
   <div class="card">
     <div class="card-header">
@@ -104,10 +131,10 @@
     <div class="btn-row">
       <button class="scan-btn" id="btn-ia_video" onclick="scan(this,'ia_video','Quelles sont les dernières innovations et actualités en matière d\'outils IA pour la création vidéo (Runway, Sora, Kling, HeyGen, Topaz AI, ElevenLabs) ? Donne-moi 4 points clés récents sous forme structurée, pertinents pour un directeur de production vidéo en France.','IA & Outils vidéo')">Scanner →</button>
       <button class="audio-btn" id="audio-ia_video" onclick="readCard('ia_video','IA et Outils Vidéo')">♪</button>
+      <button class="notion-btn" id="notion-btn-ia_video" onclick="saveToNotion('ia_video')" title="Sauver dans Notion">N</button>
     </div>
     <div class="results" id="ia_video"></div>
   </div>
-
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(55,138,221,0.15);color:#378ADD;">◈</div>
@@ -116,10 +143,10 @@
     <div class="btn-row">
       <button class="scan-btn" id="btn-formats_mkt" onclick="scan(this,'formats_mkt','Quelles sont les tendances actuelles en matière de formats vidéo marketing : formats courts, vertical video, UGC, brand content, vidéo LinkedIn, social ads vidéo ? Donne-moi 4 insights récents et actionnables pour une agence vidéo française.','Formats marketing')">Scanner →</button>
       <button class="audio-btn" id="audio-formats_mkt" onclick="readCard('formats_mkt','Formats marketing vidéo')">♪</button>
+      <button class="notion-btn" id="notion-btn-formats_mkt" onclick="saveToNotion('formats_mkt')" title="Sauver dans Notion">N</button>
     </div>
     <div class="results" id="formats_mkt"></div>
   </div>
-
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(239,159,39,0.15);color:#EF9F27;">⬡</div>
@@ -128,10 +155,10 @@
     <div class="btn-row">
       <button class="scan-btn" id="btn-workflow" onclick="scan(this,'workflow','Quelles sont les avancées récentes en matière d\'automatisation et d\'IA dans les workflows de production vidéo professionnelle ? Scripts IA, montage automatisé, voix off IA, color grading IA, gestion de projet IA. 4 points clés pour un directeur de production.','Workflow production')">Scanner →</button>
       <button class="audio-btn" id="audio-workflow" onclick="readCard('workflow','Workflow et production')">♪</button>
+      <button class="notion-btn" id="notion-btn-workflow" onclick="saveToNotion('workflow')" title="Sauver dans Notion">N</button>
     </div>
     <div class="results" id="workflow"></div>
   </div>
-
   <div class="card">
     <div class="card-header">
       <div class="icon" style="background:rgba(212,83,126,0.15);color:#D4537E;">◉</div>
@@ -140,16 +167,18 @@
     <div class="btn-row">
       <button class="scan-btn" id="btn-agences" onclick="scan(this,'agences','Comment les agences de production vidéo et de communication intègrent-elles l\'IA dans leurs offres et leur positionnement ? Y a-t-il des case studies récents sur le ROI de la vidéo augmentée par l\'IA ? 4 insights stratégiques pour se différencier sur le marché français.','Stratégie agences')">Scanner →</button>
       <button class="audio-btn" id="audio-agences" onclick="readCard('agences','Stratégie et agences')">♪</button>
+      <button class="notion-btn" id="notion-btn-agences" onclick="saveToNotion('agences')" title="Sauver dans Notion">N</button>
     </div>
     <div class="results" id="agences"></div>
   </div>
 </div>
-
 <footer>Veille IA Vidéo · Julien Retailleau · NitramIA</footer>
-
 <script>
 const store = {};
 let speaking = false, allText = '';
+const NOTION_PROXY = 'https://corsproxy.io/?';
+const NOTION_API = 'https://api.notion.com/v1/pages';
+const CARD_IDS = ['ia_video', 'formats_mkt', 'workflow', 'agences'];
 
 function onKeyInput() {
   const key = document.getElementById('api-key').value.trim();
@@ -171,15 +200,46 @@ function onKeyInput() {
 
 function getKey() { return document.getElementById('api-key').value.trim(); }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const saved = localStorage.getItem('nitramia_key');
-  if (saved) {
-    document.getElementById('api-key').value = saved;
-    document.getElementById('api-status').textContent = 'Clé valide ✓';
-    document.getElementById('api-status').className = 'api-status ok';
-    document.getElementById('save-hint').textContent = 'Clé mémorisée sur cet appareil.';
+function onNotionInput() {
+  const token = document.getElementById('notion-token').value.trim();
+  const db = document.getElementById('notion-db').value.trim();
+  const s = document.getElementById('notion-status');
+  const hint = document.getElementById('notion-hint');
+  if (token.startsWith('secret_') && db.length >= 32) {
+    s.textContent = 'Configuré ✓'; s.className = 'notion-status ok';
+    localStorage.setItem('nitramia_notion_token', token);
+    localStorage.setItem('nitramia_notion_db', db);
+    hint.textContent = 'Identifiants mémorisés. Scannez une rubrique puis cliquez N pour sauver.';
+    refreshNotionButtons();
+  } else if (token.length > 0 || db.length > 0) {
+    s.textContent = 'Incomplet'; s.className = 'notion-status ko';
+    hint.textContent = 'Token : secret_... · Database ID : depuis l\'URL de la base Notion (32 caractères)';
+  } else {
+    s.textContent = 'Non configuré'; s.className = 'notion-status';
+    hint.textContent = 'notion.so/my-integrations → copier le token · Partager la base avec l\'intégration · Copier l\'ID depuis l\'URL';
   }
-});
+}
+
+function getNotionToken() { return document.getElementById('notion-token').value.trim(); }
+function getNotionDb() { return document.getElementById('notion-db').value.trim(); }
+function isNotionReady() { const t = getNotionToken(); const d = getNotionDb(); return t.startsWith('secret_') && d.length >= 32; }
+
+function refreshNotionButtons() {
+  const ready = isNotionReady();
+  CARD_IDS.forEach(id => {
+    const btn = document.getElementById('notion-btn-' + id);
+    btn.style.display = 'block';
+    if (ready && store[id]) {
+      if (!btn.classList.contains('saved') && !btn.classList.contains('error')) {
+        btn.classList.add('ready');
+        btn.classList.remove('saving');
+      }
+    } else {
+      btn.classList.remove('ready');
+    }
+  });
+  document.getElementById('notion-all-btn').disabled = !(ready && Object.keys(store).length > 0);
+}
 
 async function scan(btn, id, prompt, label) {
   const key = getKey();
@@ -188,6 +248,9 @@ async function scan(btn, id, prompt, label) {
   const box = document.getElementById(id);
   box.className = 'results visible';
   box.innerHTML = '<div style="color:#888;font-size:13px;display:flex;align-items:center;gap:8px;">Recherche en cours <span class="loading-dots"><span></span><span></span><span></span></span></div>';
+  const nb = document.getElementById('notion-btn-' + id);
+  nb.classList.remove('saved', 'error');
+  nb.textContent = 'N';
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -221,6 +284,7 @@ async function scan(btn, id, prompt, label) {
     box.innerHTML = html;
     document.getElementById('audio-' + id).style.display = 'block';
     updateUI();
+    refreshNotionButtons();
   } catch (err) {
     box.innerHTML = `<p style="color:#E24B4A;font-size:12px;">Erreur : ${err.message || 'Vérifiez votre clé API et votre connexion.'}</p>`;
   }
@@ -234,6 +298,63 @@ function scanAll() {
     { id: 'workflow', label: 'Workflow production', prompt: 'Quelles sont les avancées récentes en matière d\'automatisation et d\'IA dans les workflows de production vidéo professionnelle ? Scripts IA, montage automatisé, voix off IA, color grading IA, gestion de projet IA. 4 points clés pour un directeur de production.' },
     { id: 'agences', label: 'Stratégie agences', prompt: 'Comment les agences de production vidéo et de communication intègrent-elles l\'IA dans leurs offres et leur positionnement ? Y a-t-il des case studies récents sur le ROI de la vidéo augmentée par l\'IA ? 4 insights stratégiques pour se différencier sur le marché français.' }
   ].forEach(c => scan(document.getElementById('btn-' + c.id), c.id, c.prompt, c.label));
+}
+
+async function saveToNotion(id) {
+  if (!isNotionReady()) { alert('Configurez d\'abord votre token Notion et l\'ID de la base en haut de page.'); return; }
+  if (!store[id]) { alert('Scannez d\'abord cette rubrique.'); return; }
+  const btn = document.getElementById('notion-btn-' + id);
+  btn.classList.remove('ready', 'saved', 'error');
+  btn.classList.add('saving');
+  btn.textContent = '↑';
+  const { label, items } = store[id];
+  const token = getNotionToken();
+  const dbId = getNotionDb().replace(/-/g, '');
+  const today = new Date().toISOString().split('T')[0];
+  let saved = 0, errors = 0;
+  for (const item of items) {
+    try {
+      const payload = {
+        parent: { database_id: dbId },
+        properties: {
+          Name: { title: [{ text: { content: item.titre } }] },
+          Rubrique: { select: { name: label } },
+          Date: { date: { start: today } }
+        },
+        children: [{ object: 'block', type: 'paragraph', paragraph: { rich_text: [{ type: 'text', text: { content: item.contenu } }] } }]
+      };
+      const url = NOTION_PROXY + encodeURIComponent(NOTION_API);
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json', 'Notion-Version': '2022-06-28' },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) { saved++; } else { const err = await res.json(); console.error('Notion error:', err); errors++; }
+    } catch (e) { console.error('Fetch error:', e); errors++; }
+  }
+  btn.classList.remove('saving');
+  if (errors === 0) {
+    btn.classList.add('saved'); btn.textContent = '✓';
+    showToast(`${saved} éléments sauvés dans Notion`, 'success');
+  } else if (saved > 0) {
+    btn.classList.add('saved'); btn.textContent = `${saved}/${items.length}`;
+    showToast(`${saved}/${items.length} sauvés — vérifiez les propriétés Rubrique et Date`, 'error');
+  } else {
+    btn.classList.add('error'); btn.textContent = '!';
+    showToast('Erreur Notion — vérifiez token, DB ID et permissions', 'error');
+  }
+  refreshNotionButtons();
+  document.getElementById('notion-all-btn').disabled = false;
+}
+
+async function saveAllToNotion() {
+  const toSave = CARD_IDS.filter(id => store[id]);
+  if (toSave.length === 0) { alert('Scannez d\'abord au moins une rubrique.'); return; }
+  document.getElementById('notion-all-btn').disabled = true;
+  document.getElementById('notion-all-btn').textContent = 'Sauvegarde...';
+  for (const id of toSave) { await saveToNotion(id); }
+  document.getElementById('notion-all-btn').textContent = 'Tout → Notion';
+  document.getElementById('notion-all-btn').disabled = false;
 }
 
 function updateUI() {
@@ -253,6 +374,13 @@ function buildAllText() {
   allText = parts.join(' ');
 }
 
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (type ? ' ' + type : '');
+  setTimeout(() => { t.className = 'toast'; }, 3500);
+}
+
 function readCard(id, label) {
   if (!store[id]) return;
   const parts = [`Rubrique ${label}.`];
@@ -261,8 +389,12 @@ function readCard(id, label) {
 }
 
 function togglePlay() {
-  if (speaking) { window.speechSynthesis.cancel(); speaking = false; document.getElementById('play-btn').textContent = '▶'; document.getElementById('podcast-status').textContent = 'Arrêté'; document.getElementById('progress-fill').style.width = '0%'; }
-  else { buildAllText(); speak(allText, 'Brief veille complet'); }
+  if (speaking) {
+    window.speechSynthesis.cancel(); speaking = false;
+    document.getElementById('play-btn').textContent = '▶';
+    document.getElementById('podcast-status').textContent = 'Arrêté';
+    document.getElementById('progress-fill').style.width = '0%';
+  } else { buildAllText(); speak(allText, 'Brief veille complet'); }
 }
 
 function speak(text, title) {
@@ -287,8 +419,17 @@ function animateProgress(text) {
 function copyForNotebook() {
   buildAllText();
   if (!allText) return;
-  navigator.clipboard.writeText(allText).then(() => { const t = document.getElementById('toast'); t.className = 'toast show'; setTimeout(() => t.className = 'toast', 2500); });
+  navigator.clipboard.writeText(allText).then(() => showToast('Contenu copié — colle dans NotebookLM'));
 }
+
+window.addEventListener('DOMContentLoaded', () => {
+  const key = localStorage.getItem('nitramia_key');
+  if (key) { document.getElementById('api-key').value = key; document.getElementById('api-status').textContent = 'Clé valide ✓'; document.getElementById('api-status').className = 'api-status ok'; document.getElementById('save-hint').textContent = 'Clé mémorisée sur cet appareil.'; }
+  const nt = localStorage.getItem('nitramia_notion_token');
+  const nd = localStorage.getItem('nitramia_notion_db');
+  if (nt && nd) { document.getElementById('notion-token').value = nt; document.getElementById('notion-db').value = nd; document.getElementById('notion-status').textContent = 'Configuré ✓'; document.getElementById('notion-status').className = 'notion-status ok'; document.getElementById('notion-hint').textContent = 'Identifiants mémorisés. Scannez une rubrique puis cliquez N pour sauver.'; }
+  CARD_IDS.forEach(id => { document.getElementById('notion-btn-' + id).style.display = 'block'; });
+});
 </script>
 </body>
 </html>
